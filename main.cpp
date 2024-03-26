@@ -1,60 +1,90 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <sstream>
 using namespace std;
 
-string address;
+class Con{
+    protected:
+        string address;
+    public:
+        void scan();
+        void pairing();
+        void connect();
+        void disconnect();
+};
 
-void scan() {
-
-    system("hcitool scan");
-    cout << "Write the Mac address" << endl;
-    cin>>address;
+void Con::scan(){
+            system("hcitool scan");
+            cout<<"Do u wanna write MAC address[y/n]"<<endl;
+            char c;
+            cin>>c;
+            if(c=='y')
+            {
+                cout << "Write the Mac address" << endl;
+                cin>>address;
+            }
 }
 
-void pairing() {
+
+
+void Con::pairing() {
     system(("bluetoothctl pair " + address).c_str());
     system("exit");
 }
 
-void connect() {
+void Con::connect() {
     system(("bluetoothctl connect " + address).c_str());
     system("exit");
 }
 
-void disconnect() {
+void Con::disconnect() {
     system(("bluetoothctl disconnect " + address).c_str());
     system("exit");
 }
 
 int main(void) {
-    system("rfkill unblock 0");
+
+    Con *con ;
+
+
+    for(int i=0 ; i<3; i++)
+    {
+        std::stringstream command;
+        command << "rfkill unblock " << i;
+        system(command.str().c_str());
+    }
+    
 
     cout << " Welcome to ToothDroid" << endl;
 
     for (;;) {
-        cout << "----------What do you wanna do ?---------" << endl;
+        cout<<endl;
+        cout << "----------What-do-you-wanna-do-?---------" << endl;
         cout << "-----------------------------------------" << endl;
         cout << "-----------------------------------------" << endl;
-        cout << "          1-Scanning Devices             " << endl;
-        cout << "          2-Pair Device               " << endl;
-        cout << "          3-Connect to Device            " << endl;
-        cout << "          4-Disconnect                   " << endl;
-        cout << "          5-Exit                         " << endl;
+        cout << "----------1-Scanning Devices-------------" << endl;
+        cout << "----------2-Pair-Device------------------" << endl;
+        cout << "----------3-Connect-to-Device------------" << endl;
+        cout << "----------4-Disconnect-------------------" << endl;
+        cout << "----------5-Exit-------------------------" << endl;
+        cout << "-----------------------------------------" << endl;
+        cout << "-----------------------------------------" << endl;
+        cout<<endl;
         int num;
         cin >> num;
         switch (num) {
             case 1:
-                scan();
+                con->scan();
                 break;
             case 2:
-                pairing();
+                con->pairing();
                 break;
             case 3:
-                connect();
+                con->connect();
                 break;
             case 4:
-                disconnect();
+                con->disconnect();
                 break;
             case 5:
                 return 0; // Exiting the program
