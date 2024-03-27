@@ -4,3 +4,10 @@
 
 <p align="center"><img src="https://i.ibb.co/nQwrKRg/b-connector.png" width="390" height="190" 
 title="cli"></p>
+<br>
+
+- To install
+
+    npm install @suaybdemir/bluetooth-connector-linux@1.0.0
+
+    
