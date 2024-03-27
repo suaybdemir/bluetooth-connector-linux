@@ -61,7 +61,7 @@ int main(void) {
     }
     
 
-    cout << " Welcome to ToothDroid" << endl;
+        cout << "          Welcome to ToothDroid          " << endl;
 
     for (;;) {
         cout<<endl;
