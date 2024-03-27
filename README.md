@@ -1,4 +1,4 @@
-<p align="center"># Bluetooth Connector V 1.0</p>
+# <p align="center">Bluetooth Connector V 1.0</p>
 
 <p align="center">I created as to basically connect bluetooth devices from xFce desktop environment on Ubuntu.</p>
 
