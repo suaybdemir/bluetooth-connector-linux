@@ -8,6 +8,6 @@ title="cli"></p>
 
 - To install
 
-    npm install @suaybdemir/bluetooth-connector-linux@1.0.0
+    <p align="center">npm install @suaybdemir/bluetooth-connector-linux@1.0.0</p>
 
     
