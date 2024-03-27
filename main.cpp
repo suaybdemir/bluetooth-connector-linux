@@ -45,7 +45,7 @@ void Con::disconnect() {
 
 int main(void) {
 
-    Con *con ;
+    static Con *con = nullptr;
 
 
     for(int i=0 ; i<3; i++)
