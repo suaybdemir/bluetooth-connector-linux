@@ -10,7 +10,11 @@ title="cli"></p>
 
 <p align="center">To install</p>
 
-```bash <p align="center">
+<p align="center">
+
+```bash 
   npm install @suaybdemir/bluetooth-connector-linux@1.0.0
 ```
+
+</p>
     
