@@ -8,39 +8,44 @@ class Con{
     protected:
         string address;
     public:
-        void scan();
-        void pairing();
-        void connect();
-        void disconnect();
+        Con() : address(""){}
+        string& scan();
+        string& pairing();
+        string& connect();
+        string& disconnect();
 };
 
-void Con::scan(){
+string& Con::scan(){
             system("hcitool scan");
             cout<<"Do u wanna write MAC address[y/n]"<<endl;
-            char c;
+            char c; 
             cin>>c;
             if(c=='y')
             {
                 cout << "Write the Mac address" << endl;
-                cin>>address;
+                getline(cin>>ws,address);
             }
+            return address;
 }
 
 
 
-void Con::pairing() {
+string& Con::pairing() {
     system(("bluetoothctl pair " + address).c_str());
     system("exit");
+    return address;
 }
 
-void Con::connect() {
+string& Con::connect() {
     system(("bluetoothctl connect " + address).c_str());
     system("exit");
+    return address;
 }
 
-void Con::disconnect() {
+string& Con::disconnect() {
     system(("bluetoothctl disconnect " + address).c_str());
     system("exit");
+    return address;
 }
 
 int main(void) {
