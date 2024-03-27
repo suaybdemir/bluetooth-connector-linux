@@ -8,7 +8,7 @@
 title="cli"></p>
 <br>
 
-<p align="center">To install</p>
+### <p align="center">To install</p>
 
 <p align="center">
 
