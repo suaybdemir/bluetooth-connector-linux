@@ -1,5 +1,5 @@
 {
-  "name": "@suaybdemir/Bluetooth_Connector_Linux",
+  "name": "@suaybdemir/bluetooth-connector-linux",
   "version": "1.0.0",
   "description": "- I created as to basically connect bluetooth devices from xFce desktop environment on Ubuntu.",
   "main": "index.js",
@@ -8,8 +8,8 @@
   },
   "keywords": [],
   "author": "",
-  "publishConfig": {
-    "@suaybdemir:registry": "https://npm.pkg.github.com"
+  "repository": { 
+    "url": "git://github.com/suaybdemir/bluetooth-connector-linux.git"
   },
   "license": "ISC"
 }

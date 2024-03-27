@@ -1,0 +1,50 @@
+Arguments: 
+  /snap/node/8440/bin/node /snap/node/8440/bin/yarn.js add @suaybdemir/Bluetooth_Connector_Linux
+
+PATH: 
+  /opt/lampp:/home/ubuntu/pycharm-community/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.12.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://npm.pkg.github.com/@suaybdemir%2fBluetooth_Connector_Linux: npm package "Bluetooth_Connector_Linux" does not exist under owner "suaybdemir"
+      at params.callback [as _callback] (/snap/node/8440/lib/cli.js:66145:18)
+      at self.callback (/snap/node/8440/lib/cli.js:140890:22)
+      at Request.emit (node:events:518:28)
+      at Request.<anonymous> (/snap/node/8440/lib/cli.js:141862:10)
+      at Request.emit (node:events:518:28)
+      at IncomingMessage.<anonymous> (/snap/node/8440/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:632:28)
+      at IncomingMessage.emit (node:events:530:35)
+      at endReadableNT (node:internal/streams/readable:1696:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "@suaybdemir/Bluetooth_Connector_Linux",
+    "version": "1.0.0",
+    "description": "- I created as to basically connect bluetooth devices from xFce desktop environment on Ubuntu.",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "repository": { 
+      "url": "git://github.com/suaybdemir/Bluetooth_Connector_Linux.git"
+    },
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
