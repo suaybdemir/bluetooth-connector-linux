@@ -8,8 +8,8 @@
   },
   "keywords": [],
   "author": "",
-  "repository": { 
-    "url": "git://github.com/suaybdemir/Bluetooth_Connector_Linux.git"
+  "publishConfig": {
+    "@suaybdemir:registry": "https://npm.pkg.github.com"
   },
   "license": "ISC"
 }
