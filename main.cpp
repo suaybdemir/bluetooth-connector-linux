@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
+#include <fstream>
 using namespace std;
 
 class Con{
@@ -15,17 +16,21 @@ class Con{
         string& disconnect();
 };
 
-string& Con::scan(){
-            system("hcitool scan");
-            cout<<"Do u wanna write MAC address[y/n]"<<endl;
-            char c; 
-            cin>>c;
-            if(c=='y')
-            {
-                cout << "Write the Mac address" << endl;
-                getline(cin>>ws,address);
-            }
-            return address;
+string& Con::scan()
+{
+
+    cout<<"Scan Started"<<endl;
+    system("hcitool scan && hcitool scan > db.txt");
+
+    cout<<"Do u wanna write MAC address[y/n]"<<endl;
+    char c; 
+    cin>>c;
+    if(c=='y')
+    {
+        cout << "Write the Mac address" << endl;
+        cin>>address;
+    }
+    return address;
 }
 
 
@@ -43,14 +48,14 @@ string& Con::connect() {
 }
 
 string& Con::disconnect() {
-    system(("bluetoothctl disconnect " + address).c_str());
+    system("bluetoothctl disconnect ");
     system("exit");
     return address;
 }
 
 int main(void) {
 
-    static Con *con = nullptr;
+    Con con;
 
 
     for(int i=0 ; i<3; i++)
@@ -80,16 +85,16 @@ int main(void) {
         cin >> num;
         switch (num) {
             case 1:
-                con->scan();
+                con.scan();
                 break;
             case 2:
-                con->pairing();
+                con.pairing();
                 break;
             case 3:
-                con->connect();
+                con.connect();
                 break;
             case 4:
-                con->disconnect();
+                con.disconnect();
                 break;
             case 5:
                 return 0; // Exiting the program
