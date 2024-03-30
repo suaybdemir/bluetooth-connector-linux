@@ -1,4 +1,4 @@
-# <p align="center">Bluetooth Connector V 1.0</p>
+# <p align="center">Bluetooth Connector</p>
 
 <p align="center">I created as to basically connect bluetooth devices from xFce desktop environment on Ubuntu.</p>
 
@@ -17,4 +17,12 @@ title="cli"></p>
 ```
 
 </p>
+
+- V1.1
+	
+	Added auto copying mac address.
+	Deleted manual copying mac address as to connect or what you wanna do...
+
+
+	
     
