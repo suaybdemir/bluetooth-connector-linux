@@ -1,2 +1,2 @@
 Scanning ...
-	00:F9:0D:A8:44:DC	K40
+	58:C5:CB:73:D6:E0	Galaxy A7 (2017)
