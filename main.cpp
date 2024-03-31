@@ -51,7 +51,7 @@ int main(void) {
                 con.disconnect();
                 break;
             case 5:
-                system("rm db.txt");
+                system("rm conf/db.txt");
                 return 0; 
             default:
                 break;

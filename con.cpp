@@ -8,25 +8,22 @@ void Con::scanBluetoothDevices()
     address.clear(); // Firstly Clear Address
 
     cout<<"Scan Started"<<endl;
-    system("hcitool scan > db.txt");
 
     fstream db;
+    
 
-    db.open("db.txt",ios::in | ios::out);
+    db.open("conf/db.txt",ios::in | ios::out);
+    system("hcitool scan > conf/db.txt");
+
     if(db.fail())
     {
-        cout<<"Error #001 Do you want to try again[y/n]?"<<endl;
-        char ch;
-        cin>>ch;
-        if(ch=='y')
-        {
-            scanBluetoothDevices();
-        }
+        cout<<"Error #001 Occured! "<<endl;
+        return;
     }
 
     int i = 0;
 
-    cout<<"-------------Appropriate Bluetooth Devices!!------------------- "<<endl;
+    cout<<"<-------*Appropriate-Bluetooth-Devices*------> "<<endl;
 
     string line;
 
@@ -75,13 +72,10 @@ void Con::scanBluetoothDevices()
         }
     }
 
-    cout<<"This is selected Bluetooth Device MAC address!!!"<<address<<endl;
-
     db.close();
-
     if(db.fail())
     {
-        cout<<"Error #002 ( Not important! )"<<endl;
+        cout<<"Error #002 Occured!( Not important )"<<endl;
     }
 }
 
