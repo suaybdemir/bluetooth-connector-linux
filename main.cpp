@@ -10,13 +10,7 @@ int main(void) {
 
     Con con;
 
-
-    for(int i=0 ; i<2; i++)
-    {
-        std::stringstream command;
-        command << "rfkill unblock " << i;
-        system(command.str().c_str());
-    }
+        system("bluetoothctl power on");
     
 
         cout << "          Welcome to ToothDroid          " << endl;

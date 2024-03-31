@@ -1,16 +1,8 @@
 #include "con.h"
 #include <iostream>
 #include <fstream>
+#include "connectors.h"
 using namespace std;
-
-
-typedef struct connectors
-{
-    fstream db;
-    string line;
-    string temp;
-    int lNum;
-}CONNECTION_CONNECTORS;
 
 void Con::scanBluetoothDevices()
 {
@@ -20,13 +12,8 @@ void Con::scanBluetoothDevices()
     cout<<"Scan Started"<<endl;    
 
     connector.db.open("conf/db.txt",ios::in | ios::out);
-    system("hcitool scan > conf/db.txt");
 
-    if(connector.db.fail())
-    {
-        cout<<"Error #001 Occured! "<<endl;
-        return;
-    }
+    system("hcitool scan > conf/db.txt");
 
     cout<<"<-------*Appropriate-Bluetooth-Devices*------> "<<endl;
 
@@ -76,10 +63,6 @@ void Con::scanBluetoothDevices()
     }
 
     connector.db.close();
-    if(connector.db.fail())
-    {
-        cout<<"Error #002 Occured!( Not important )"<<endl;
-    }
 }
 
 void Con::pairing() {
