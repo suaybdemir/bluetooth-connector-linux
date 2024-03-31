@@ -3,77 +3,80 @@
 #include <fstream>
 using namespace std;
 
+
+typedef struct connectors
+{
+    fstream db;
+    string line;
+    string temp;
+    int lNum;
+}CONNECTION_CONNECTORS;
+
 void Con::scanBluetoothDevices()
 {
+    CONNECTION_CONNECTORS connector;
     address.clear(); // Firstly Clear Address
 
-    cout<<"Scan Started"<<endl;
+    cout<<"Scan Started"<<endl;    
 
-    fstream db;
-    
-
-    db.open("conf/db.txt",ios::in | ios::out);
+    connector.db.open("conf/db.txt",ios::in | ios::out);
     system("hcitool scan > conf/db.txt");
 
-    if(db.fail())
+    if(connector.db.fail())
     {
         cout<<"Error #001 Occured! "<<endl;
         return;
     }
 
-    int i = 0;
-
     cout<<"<-------*Appropriate-Bluetooth-Devices*------> "<<endl;
 
-    string line;
+    int i = 0;
 
-    while(getline(db,line))
+    while(getline(connector.db,connector.line))
     {
         if(i>=1)
         {
-            cout<<i<<"- "<<line<<endl;
+            cout<<i<<"- "<<connector.line<<endl;
         }
         i++;
     }
 
     cout<<"Select an option (to exit write -1)"<<endl;
-    int lNum;
-    cin>>lNum;
+    cin>>connector.lNum;
 
-    lNum++;
+    connector.lNum++;
 
-    string temp;
+    connector.db.clear(); // as to clearly run this program (cleared any error flags!)
+    connector.db.seekg(0,ios::beg); // cursor came to begin
+
     int count = 1;
 
-    db.clear(); // as to clearly run this program (cleared any error flags!)
-    db.seekg(0,ios::beg); // cursor came to begin
-
-    while(getline(db,line))
+    while(getline(connector.db,connector.line))
     {
-        if(lNum==count)
+        if(connector.lNum==count)
         {
-            temp = line;
-            cout<<line<<endl;
+            connector.temp = connector.line;
+            cout<<connector.line<<endl;
             break;
         }
         count++;
     }
 
-    for(int i = 0;i< temp.length()-17 ; i++)
+    for(int i = 0;i< connector.temp.length()-17 ; i++)
     {
-        if(temp[i+2]== ':')
+        if(connector.temp[i+2]== ':')
         {
             for(int j = 0; j<17 ; j++)
             {
-                address += temp[i+j];
+                address += connector.temp[i+j];
             }
             cout<<endl;
             break;
         }
     }
 
-    db.close();
-    if(db.fail())
+    connector.db.close();
+    if(connector.db.fail())
     {
         cout<<"Error #002 Occured!( Not important )"<<endl;
     }

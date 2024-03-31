@@ -11,7 +11,7 @@ int main(void) {
     Con con;
 
 
-    for(int i=0 ; i<3; i++)
+    for(int i=0 ; i<2; i++)
     {
         std::stringstream command;
         command << "rfkill unblock " << i;

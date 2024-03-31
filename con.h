@@ -4,18 +4,13 @@
 
 class Con{
     protected:
-
         std::string address;
-
     public:
-
         Con() : address(""){}
         void scanBluetoothDevices();
         void pairing();
         void connect();
         void disconnect();
 };
-
-
 
 #endif
