@@ -1,7 +1,7 @@
 build: run
 
 run:
-	g++ main.cpp -o output
+	g++ main.cpp con.cpp con.h -o output
 	./output
 
 clean:
