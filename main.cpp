@@ -10,7 +10,8 @@ int main(void) {
 
     Con con;
 
-        system("bluetoothctl power on");
+        system("rfkill unblock 1");
+        system("rfkill unblock 0");
     
 
         cout << "          Welcome to ToothDroid          " << endl;
