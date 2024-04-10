@@ -8,7 +8,7 @@ using namespace std;
 
 int main(void) {
 
-    Con con;
+    Con& con = Con::getInstance();
 
         system("rfkill unblock 1");
         system("rfkill unblock 0");

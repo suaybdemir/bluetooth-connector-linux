@@ -5,8 +5,14 @@
 class Con{
     protected:
         std::string address;
-    public:
+    private:
         Con() : address(""){}
+    public:
+        static Con& getInstance()
+        {
+            static Con instance;
+            return instance;
+        }
         void scanBluetoothDevices();
         void pairing();
         void connect();
