@@ -4,16 +4,18 @@
 #include <sstream>
 #include <fstream>
 #include "con.h"
+#include "Entities/connection.h"
+#include "Entities/pair.h"
+#include "Entities/scanBluetoothDevices.h"
 using namespace std;
 
 int main(void) {
 
-    Con& con = Con::getInstance();
+    Con* con ;
 
-        system("rfkill unblock 1");
-        system("rfkill unblock 0");
+    system("rfkill unblock 1");
+    system("rfkill unblock 0");
     
-
         cout << "          Welcome to ToothDroid          " << endl;
 
     for (;;) {
@@ -34,16 +36,24 @@ int main(void) {
         cin >> num;
         switch (num) {
             case 1:
-                con.scanBluetoothDevices();
+                ScanBluetoothDevices scan;
+                con = &scan;
+                con->scanBluetoothDevices();
                 break;
             case 2:
-                con.pairing();
+                Pair pair;
+                con = &pair;
+                con->pairing();
                 break;
             case 3:
-                con.connect();
+                Connection connect;
+                con = &connect;
+                con->connect();
                 break;
             case 4:
-                con.disconnect();
+                Connection disconnect;
+                con = &disconnect;
+                con->disconnect();
                 break;
             case 5:
                 system("rm conf/db.txt");

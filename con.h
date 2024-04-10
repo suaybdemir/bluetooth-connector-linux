@@ -2,14 +2,12 @@
 #define CON_H
 #include <iostream>
 
+std::string address;
+
 class Con{
-    protected:
-        std::string address;
-    private:
-        Con() : address(""){}
     public:
-        static Con& getInstance()
-        {
+
+        static Con& getInstance(){
             static Con instance;
             return instance;
         }
@@ -17,6 +15,23 @@ class Con{
         void pairing();
         void connect();
         void disconnect();
+
+        
 };
+
+
+// class Con{
+//     public:
+//         static Con& getInstance()
+//         {
+//             static Con instance;
+//             return instance;
+//         }
+//         void scanBluetoothDevices();
+//         void pairing();
+//         void connect();
+//         void disconnect();
+        
+// };
 
 #endif
