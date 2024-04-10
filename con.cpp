@@ -65,20 +65,20 @@ using namespace std;
 //     connector.db.close();
 // }
 
-void Con::pairing() {
-    system(("bluetoothctl pair " + address).c_str());
-    system("exit");
+// void Con::pairing() {
+//     system(("bluetoothctl pair " + address).c_str());
+//     system("exit");
     
-}
+// }
 
-void Con::connect() {
-    system(("bluetoothctl connect " + address).c_str());
-    system("exit");
+// void Con::connect() {
+//     system(("bluetoothctl connect " + address).c_str());
+//     system("exit");
     
-}
+// }
 
-void Con::disconnect() {
-    system("bluetoothctl disconnect ");
-    system("exit");
+// void Con::disconnect() {
+//     system("bluetoothctl disconnect ");
+//     system("exit");
     
-}
+// }
