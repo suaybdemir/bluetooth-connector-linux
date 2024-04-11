@@ -2,21 +2,27 @@
 #define CON_H
 #include <iostream>
 
+std::string address;
+
 class Con{
-    protected:
-        std::string address;
     private:
-        Con() : address(""){}
+        static Con* instance ;
     public:
-        static Con& getInstance()
-        {
-            static Con instance;
+
+        static Con* getInstance(){
+            if(!instance)
+            {
+                instance = new Con();
+            }
             return instance;
         }
+
         void scanBluetoothDevices();
-        void pairing();
-        void connect();
-        void disconnect();
+         void pairing();
+         void connect();
+         void disconnect();
 };
+
+Con *Con::instance = nullptr;
 
 #endif
