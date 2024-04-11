@@ -1,7 +1,7 @@
 build: run
 
 run:
-	g++ main.cpp con.h Entities/connection.h Entities/pair.h Entities/scanBluetoothDevices.h -o output
+	g++ main.cpp -o output
 	./output
 
 clean:

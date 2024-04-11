@@ -11,7 +11,7 @@ using namespace std;
 
 int main(void) {
 
-    Con* con ;
+    Con *con = Con::getInstance();
 
     system("rfkill unblock 1");
     system("rfkill unblock 0");
@@ -37,23 +37,19 @@ int main(void) {
         switch (num) {
             case 1:
                 ScanBluetoothDevices scan;
-                con = &scan;
-                con->scanBluetoothDevices();
+                scan.scanBluetoothDevices();
                 break;
             case 2:
                 Pair pair;
-                con = &pair;
-                con->pairing();
+                pair.pairing();
                 break;
             case 3:
-                Connection connect;
-                con = &connect;
-                con->connect();
+                Connection connection;
+                connection.connect();
                 break;
             case 4:
                 Connection disconnect;
-                con = &disconnect;
-                con->disconnect();
+                disconnect.disconnect();
                 break;
             case 5:
                 system("rm conf/db.txt");

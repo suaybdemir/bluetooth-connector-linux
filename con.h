@@ -5,33 +5,24 @@
 std::string address;
 
 class Con{
+    private:
+        static Con* instance ;
     public:
 
-        static Con& getInstance(){
-            static Con instance;
+        static Con* getInstance(){
+            if(!instance)
+            {
+                instance = new Con();
+            }
             return instance;
         }
-        void scanBluetoothDevices();
-        void pairing();
-        void connect();
-        void disconnect();
 
-        
+        void scanBluetoothDevices();
+         void pairing();
+         void connect();
+         void disconnect();
 };
 
-
-// class Con{
-//     public:
-//         static Con& getInstance()
-//         {
-//             static Con instance;
-//             return instance;
-//         }
-//         void scanBluetoothDevices();
-//         void pairing();
-//         void connect();
-//         void disconnect();
-        
-// };
+Con *Con::instance = nullptr;
 
 #endif
