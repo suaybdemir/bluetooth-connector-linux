@@ -23,6 +23,13 @@ title="cli"></p>
 	Added auto copying mac address.
 	Deleted manual copying mac address as to connect or what you wanna do...
 
+- V1.2
+	
+	Fixed unnecessary wrong code structures.
+	Code optimization has done.
+
+
+
 
 	
     
