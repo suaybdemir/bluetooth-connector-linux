@@ -27,9 +27,7 @@ title="cli"></p>
 	
 	Fixed unnecessary wrong code structures.
 	Code optimization has done.
-
-
-
-
 	
-    
+- V1.21 
+
+	Changed main screen
