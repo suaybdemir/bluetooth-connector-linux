@@ -18,16 +18,16 @@ title="cli"></p>
 
 </p>
 
-- V1.1
+- V0.1
 	
 	Added auto copying mac address.
 	Deleted manual copying mac address as to connect or what you wanna do...
 
-- V1.2
+- V0.2
 	
 	Fixed unnecessary wrong code structures.
 	Code optimization has done.
 	
-- V1.21 
+- V0.21 
 
 	Changed main screen
