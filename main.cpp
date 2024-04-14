@@ -12,42 +12,42 @@ using namespace std;
 
 int main(void) {
 
-    Con *con = Con::getInstance();
+Con *con = Con::getInstance();
 
-    system("rfkill unblock 1");
-    system("rfkill unblock 0");
-    
-        cout << "          Welcome to ToothDroid          " << endl;
-        cout<<endl;
-        cout << "----------What-do-you-wanna-do-?---------" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "----------1-Scan-------------------------" << endl;
-        cout << "----------2-Disconnect-Through-Current---" << endl;
-        cout << "----------3-Exit-------------------------" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-----------------------------------------" << endl;
-     
-        cout<<endl;
-        int num;
-        cin >> num;
-        switch (num) {
-            case 1:
-                ScanBluetoothDevices scan;
-                scan.scanBluetoothDevices();
-                break;
-            case 2:
-                Connection disconnect;
-                disconnect.disconnect();
-                break;
-            case 3:
-                system("rm conf/db.txt");
-                return 0; 
-            default:
-                break;
-        }
+system("rfkill unblock 1");
+system("rfkill unblock 0");
 
-        screen();
+cout << "          Welcome to ToothDroid          " << endl;
+cout<<endl;
+cout << "----------What-do-you-wanna-do-?---------" << endl;
+cout << "-----------------------------------------" << endl;
+cout << "-----------------------------------------" << endl;
+cout << "----------1-Scan-------------------------" << endl;
+cout << "----------2-Disconnect-Through-Current---" << endl;
+cout << "----------3-Exit-------------------------" << endl;
+cout << "-----------------------------------------" << endl;
+cout << "-----------------------------------------" << endl;
 
-        return 0;
-    }
+cout<<endl;
+int num;
+cin >> num;
+switch (num) {
+case 1:
+ScanBluetoothDevices scan;
+scan.scanBluetoothDevices();
+break;
+case 2:
+Connection disconnect;
+disconnect.disconnect();
+break;
+case 3:
+system("rm conf/db.txt");
+return 0; 
+default:
+break;
+}
+
+screen();
+
+return 0;
+}
