@@ -15,7 +15,6 @@ class ScanBluetoothDevices : public Con{
         void scanBluetoothDevices() {
             
             CONNECTION_CONNECTORS connector;
-            address.clear(); // Firstly Clear Address
 
             cout<<"Scan Started"<<endl;    
 

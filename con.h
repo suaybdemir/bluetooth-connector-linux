@@ -2,7 +2,7 @@
 #define CON_H
 #include <iostream>
 
-std::string address;
+const std::string* address;
 
 class Con{
     private:
