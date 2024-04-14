@@ -29,9 +29,13 @@ title="cli"></p>
 	Code optimization has done.
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 - V0.21 
 =======
 - V1.21 
 >>>>>>> 432d50a (Edited Readme)
+=======
+- V0.21 
+>>>>>>> refs/remotes/origin/main
 
 	Changed main screen
