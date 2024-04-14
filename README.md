@@ -28,6 +28,10 @@ title="cli"></p>
 	Fixed unnecessary wrong code structures.
 	Code optimization has done.
 	
+<<<<<<< HEAD
 - V0.21 
+=======
+- V1.21 
+>>>>>>> 432d50a (Edited Readme)
 
 	Changed main screen
