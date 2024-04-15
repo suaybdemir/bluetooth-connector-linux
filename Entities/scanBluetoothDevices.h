@@ -23,9 +23,9 @@ void scanBluetoothDevices() {
 {//Scan Operations
 cout<<"Scan Started"<<endl;    
 
-connector.db.open("conf/db.txt",ios::in | ios::out);//Lets create one
+connector.db.open("db.txt",ios::in | ios::out);//Lets create one
 
-system("hcitool scan > conf/db.txt");//Lets write to the text file
+system("hcitool scan > db.txt");//Lets write to the text file
 }
 
 connector.db.seekg(0, ios::end);
