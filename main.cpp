@@ -41,7 +41,7 @@ Connection disconnect;
 disconnect.disconnect();
 break;
 case 3:
-system("rm conf/db.txt");
+system("rm Entities/db.txt");
 return 0; 
 default:
 break;
