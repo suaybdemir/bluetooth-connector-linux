@@ -46,17 +46,7 @@ void screen() {
                 disconnect.disconnect();
                 break;
             case 5:
-            
-                try
-                {
-                    system("rm conf/db.txt");
-                }
-                catch(const std::exception& e)
-                {
-                    std::cerr << '\n';
-                }
-
-                return;
+                system("rm Entities/db.txt");
                 break;
             default:
                 break;
