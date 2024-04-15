@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <string>
 
 #include "../con.h"
 #include "../connectors.h"
@@ -14,34 +15,24 @@ CONNECTION_CONNECTORS connector;
 
 shared_ptr<bool> retry = std::make_shared<bool>(false);
 
-bool isEmpty()
-{
-connector.db.seekg(0, ios::end); 
-bool empty = connector.db.tellg() == 0;
-return empty;
-}
-
 class ScanBluetoothDevices : public Con{
 public:
        
-<<<<<<< HEAD
-        void scanBluetoothDevices() {
-            
-            CONNECTION_CONNECTORS connector;
-=======
 void scanBluetoothDevices() {
     
 {//Scan Operations
 cout<<"Scan Started"<<endl;    
->>>>>>> refs/remotes/origin/main
 
 connector.db.open("conf/db.txt",ios::in | ios::out);//Lets create one
 
 system("hcitool scan > conf/db.txt");//Lets write to the text file
 }
-if(isEmpty())
-{
-cout<<"There is any appropriate device!"<<endl;
+
+connector.db.seekg(0, ios::end);
+bool empty = connector.db.tellg() == 0;
+connector.db.seekg(0, ios::beg);
+
+if(empty==0){
 {//Options as to decide what will do?
 cout<<"1-Retry "<<endl;
 cout<<"2-Exit"<<endl;
@@ -54,7 +45,7 @@ if(option==1)
 }
 else if(option==2)
 {
-    return;
+return;
 }
 else
 {
@@ -64,14 +55,22 @@ cout<<"2-Exit"<<endl;
 }
 }
 
+
+
 if(*retry)
 {
 scanBluetoothDevices();
 return;
 }
 
+
+cout<<"----------Select-an-option---------"<<endl;
 {//Options as to choose MAC address
+connector.db.clear(); // as to clearly run this program (cleared any error flags!)
+connector.db.seekg(0,ios::beg); // cursor came to begin
 int i = 0;
+cout<<"<-------*Appropriate-Bluetooth-Devices*------> "<<endl;//choose one option
+
 while(getline(connector.db,connector.line))// Get next line and write to the console
 if(i>=1)
 {
@@ -79,15 +78,9 @@ if(i>=1)
 }
 i++;
 }
-cout<<"----------Select-an-option---------"<<endl;
 cin>>connector.lNum;
 connector.lNum++;
-connector.db.clear(); // as to clearly run this program (cleared any error flags!)
-connector.db.seekg(0,ios::beg); // cursor came to begin
-cout<<"<-------*Appropriate-Bluetooth-Devices*------> "<<endl;//choose one option
-
 int count = 1;
-
 while(getline(connector.db,connector.line))// Get selected line
 {
 if(connector.lNum==count)
