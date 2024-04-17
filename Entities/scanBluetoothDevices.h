@@ -32,28 +32,28 @@ connector.db.seekg(0, ios::end);
 bool empty = connector.db.tellg() == 0;
 connector.db.seekg(0, ios::beg);
 
-if(empty==0){
-{//Options as to decide what will do?
-cout<<"1-Retry "<<endl;
-cout<<"2-Exit"<<endl;
-int option;
-cin>>option;
+// if(empty==0){
+// {//Options as to decide what will do?
+// cout<<"1-Retry "<<endl;
+// cout<<"2-Exit"<<endl;
+// int option;
+// cin>>option;
 
-if(option==1)
-{
-*retry = true;
-}
-else if(option==2)
-{
-return;
-}
-else
-{
-cout<<"1-Retry "<<endl;
-cout<<"2-Exit"<<endl;
-}
-}
-}
+// if(option==1)
+// {
+// *retry = true;
+// }
+// else if(option==2)
+// {
+// return;
+// }
+// else
+// {
+// cout<<"1-Retry "<<endl;
+// cout<<"2-Exit"<<endl;
+// }
+// }
+// }
 
 
 

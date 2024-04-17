@@ -46,7 +46,6 @@ void screen() {
                 disconnect.disconnect();
                 break;
             case 5:
-                system("rm Entities/db.txt");
                 break;
             default:
                 break;

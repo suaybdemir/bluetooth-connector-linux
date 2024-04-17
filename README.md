@@ -27,15 +27,7 @@ title="cli"></p>
 	
 	Fixed unnecessary wrong code structures.
 	Code optimization has done.
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-- V0.21 
-=======
-- V1.21 
->>>>>>> 432d50a (Edited Readme)
-=======
-- V0.21 
->>>>>>> refs/remotes/origin/main
 
-	Changed main screen
+- V0.21 
+
+	Added Retry Option to mainScreen.h
