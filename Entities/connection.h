@@ -6,7 +6,8 @@
 class Connection : public Con{
     public:
 
-        void connect() {
+        void connect()
+        {
             system(("bluetoothctl connect " + *address).c_str());
             system("exit");
         }

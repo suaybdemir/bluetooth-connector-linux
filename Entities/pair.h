@@ -5,9 +5,11 @@
 
 class Pair : public Con{
     public:
-        void pairing() {
-             system(("bluetoothctl pair " + *address).c_str());
-             system("exit");
+    
+        void pairing()
+        {
+            system(("bluetoothctl pair " + *address).c_str());
+            system("exit");
         }
 };
 

@@ -12,6 +12,7 @@ using namespace std;
 void screen() {
 
     cout << "          Welcome to ToothDroid          " << endl;
+    
     for (;;) {
         cout<<endl;
         cout << "----------What-do-you-wanna-do-?---------" << endl;
@@ -29,6 +30,7 @@ void screen() {
         int num;
         cin >> num;
         switch (num) {
+
             case 1:
                 ScanBluetoothDevices scan;
                 scan.scanBluetoothDevices();
@@ -46,6 +48,7 @@ void screen() {
                 disconnect.disconnect();
                 break;
             case 5:
+                return;
                 break;
             default:
                 break;
