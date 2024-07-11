@@ -21,13 +21,13 @@ class ScanBluetoothDevices : public Con{
        
     void scanBluetoothDevices() {
         
-    {//Scan Operations
-    cout<<"Scan Started"<<endl;    
+        {//Scan Operations
+        cout<<"Scan Started"<<endl;    
 
-    connector.db.open("db.txt",ios::in | ios::out);//Lets create one
+        connector.db.open("db.txt",ios::in | ios::out);//Lets create one
 
-    system("hcitool scan > db.txt");//Lets write to the text file
-    }
+        system("hcitool scan > db.txt");//Lets write to the text file
+        }
 
     connector.db.seekg(0, ios::end);
     bool empty = connector.db.tellg() == 0;
@@ -70,8 +70,6 @@ class ScanBluetoothDevices : public Con{
     connector.db.clear(); // as to clearly run this program (cleared any error flags!)
     connector.db.seekg(0,ios::beg); // cursor came to begin
     int i = 0;
-    cout<<"<-------*Appropriate-Bluetooth-Devices( to exit 0)------> "<<endl;//choose one option
-
     while(getline(connector.db,connector.line))// Get next line and write to the console
 
         if(i>=1)
@@ -80,13 +78,19 @@ class ScanBluetoothDevices : public Con{
         }
         i++;
     }
+    cout<<"<-------*Appropriate-Bluetooth-Devices( to exit 0)------> "<<endl;//choose one option
+    
     cin>>connector.lNum;
     if(connector.lNum==0)
     {
         return;
     }
+
+
     connector.lNum++;
     int count = 1;
+
+
     while(getline(connector.db,connector.line))// Get selected line
     {
         if(connector.lNum==count)
@@ -102,12 +106,12 @@ class ScanBluetoothDevices : public Con{
     {
         if(connector.temp[i+2]== ':')
         {
-        for(int j = 0; j<17 ; j++)
-        {
-            address += connector.temp[i+j];
-        }
-        cout<<endl;
-        break;
+            for(int j = 0; j<17 ; j++)
+            {
+                address += connector.temp[i+j];
+            }
+            cout<<endl;
+            break;
         }
     }
 
