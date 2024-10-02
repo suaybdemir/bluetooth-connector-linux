@@ -82,7 +82,7 @@ title="cli"></p></code>
 
 ##  Modules
 
-<details closed><summary>.</summary>
+<details closed><summary>Current</summary>
 
 | File | Summary |
 | --- | --- |
