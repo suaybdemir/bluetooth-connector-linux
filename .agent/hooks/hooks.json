@@ -1,0 +1,367 @@
+{
+    "version": "2.0.0",
+    "description": "Planning with Files - Automated behavior hooks for structured task management",
+    "hooks": {
+        "PreToolUse": {
+            "enabled": true,
+            "priority": 100,
+            "description": "Refresh context before making changes",
+            "triggers": [
+                "write_to_file",
+                "replace_file_content",
+                "multi_replace_file_content",
+                "run_command",
+                "browser_subagent"
+            ],
+            "conditions": {
+                "file_exists": "task_plan.md",
+                "cooldown_seconds": 30
+            },
+            "actions": [
+                {
+                    "type": "read_file",
+                    "path": "task_plan.md",
+                    "sections": [
+                        "Goal",
+                        "Current Phase"
+                    ],
+                    "optional": true,
+                    "purpose": "Refresh current phase and goals before making changes"
+                },
+                {
+                    "type": "read_file",
+                    "path": ".session_meta.json",
+                    "optional": true,
+                    "purpose": "Load session context"
+                }
+            ],
+            "on_failure": "continue"
+        },
+        "PostToolUse": {
+            "enabled": true,
+            "priority": 50,
+            "description": "Track actions and enforce 2-Action Rule",
+            "triggers": [
+                "web_search",
+                "read_url_content",
+                "search_web",
+                "codebase_search",
+                "grep_search",
+                "view_file"
+            ],
+            "state": {
+                "action_counter": {
+                    "type": "counter",
+                    "reset_on": "write_to_findings"
+                }
+            },
+            "actions": [
+                {
+                    "type": "increment_counter",
+                    "counter": "action_counter"
+                },
+                {
+                    "type": "conditional",
+                    "condition": "action_counter >= 2",
+                    "then": [
+                        {
+                            "type": "reminder",
+                            "level": "warning",
+                            "message": "⚠️ 2-Action Rule: You've completed 2+ research actions. Save your findings to findings.md NOW before continuing.",
+                            "persist": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "OnError": {
+            "enabled": true,
+            "priority": 90,
+            "description": "Apply 3-Strike Protocol for error recovery",
+            "triggers": [
+                "tool_error",
+                "command_failed",
+                "build_error",
+                "test_failure"
+            ],
+            "state": {
+                "error_counter": {
+                    "type": "counter",
+                    "per_context": true,
+                    "reset_after": 300
+                }
+            },
+            "actions": [
+                {
+                    "type": "increment_counter",
+                    "counter": "error_counter"
+                },
+                {
+                    "type": "protocol",
+                    "name": "3-strike",
+                    "steps": [
+                        {
+                            "strike": 1,
+                            "name": "Diagnose & Fix",
+                            "message": "🔧 Strike 1: Diagnose the root cause and attempt a targeted fix",
+                            "actions": [
+                                "analyze_error",
+                                "attempt_fix"
+                            ]
+                        },
+                        {
+                            "strike": 2,
+                            "name": "Alternative Approach",
+                            "message": "🔄 Strike 2: Previous fix failed. Try an alternative approach",
+                            "actions": [
+                                "research_alternatives",
+                                "try_alternative"
+                            ]
+                        },
+                        {
+                            "strike": 3,
+                            "name": "Broader Rethink",
+                            "message": "🤔 Strike 3: Need to rethink the approach entirely",
+                            "actions": [
+                                "step_back",
+                                "review_assumptions",
+                                "redesign"
+                            ]
+                        },
+                        {
+                            "strike": 4,
+                            "name": "Escalate to User",
+                            "message": "🆘 Strike 4: Escalating to user for guidance",
+                            "actions": [
+                                "document_attempts",
+                                "notify_user"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "log",
+                    "target": "progress.md",
+                    "section": "Error Log",
+                    "template": "### Error: {{error_type}}\n| Strike | Approach | Outcome |\n|--------|----------|---------|"
+                }
+            ]
+        },
+        "OnPhaseChange": {
+            "enabled": true,
+            "priority": 80,
+            "description": "Actions when phase status changes",
+            "triggers": [
+                "phase_started",
+                "phase_completed",
+                "phase_blocked"
+            ],
+            "actions": [
+                {
+                    "type": "conditional",
+                    "condition": "trigger == phase_started",
+                    "then": [
+                        {
+                            "type": "log",
+                            "target": "progress.md",
+                            "template": "\n### {{timestamp}} - Phase {{phase_number}} Started\n- **Phase:** {{phase_name}}\n- **Goal:** [Define goal for this phase]\n"
+                        },
+                        {
+                            "type": "update_metadata",
+                            "field": "phases.in_progress",
+                            "operation": "increment"
+                        }
+                    ]
+                },
+                {
+                    "type": "conditional",
+                    "condition": "trigger == phase_completed",
+                    "then": [
+                        {
+                            "type": "run_script",
+                            "path": ".agent/scripts/sync-progress.sh",
+                            "args": [
+                                "-s"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "OnSessionStart": {
+            "enabled": true,
+            "priority": 100,
+            "description": "5-Question Reboot Test on session resume",
+            "triggers": [
+                "session_start",
+                "conversation_resume",
+                "context_switch"
+            ],
+            "actions": [
+                {
+                    "type": "checklist",
+                    "name": "5-Question Reboot Test",
+                    "questions": [
+                        {
+                            "id": "where_am_i",
+                            "question": "Where am I?",
+                            "source": "task_plan.md",
+                            "lookup": "current_phase"
+                        },
+                        {
+                            "id": "where_going",
+                            "question": "Where am I going?",
+                            "source": "task_plan.md",
+                            "lookup": "remaining_phases"
+                        },
+                        {
+                            "id": "goal",
+                            "question": "What's the goal?",
+                            "source": "task_plan.md",
+                            "lookup": "goal_statement"
+                        },
+                        {
+                            "id": "learned",
+                            "question": "What have I learned?",
+                            "source": "findings.md",
+                            "lookup": "latest_entries"
+                        },
+                        {
+                            "id": "done",
+                            "question": "What have I done?",
+                            "source": "progress.md",
+                            "lookup": "latest_session"
+                        }
+                    ],
+                    "on_incomplete": {
+                        "type": "reminder",
+                        "message": "⚠️ Reboot Test incomplete. Review planning files before proceeding."
+                    }
+                }
+            ]
+        },
+        "PreStop": {
+            "enabled": true,
+            "priority": 100,
+            "description": "Verify completion before stopping",
+            "triggers": [
+                "task_complete",
+                "handoff",
+                "session_end"
+            ],
+            "actions": [
+                {
+                    "type": "run_script",
+                    "path": ".agent/scripts/check-complete.sh",
+                    "args": [
+                        "-q"
+                    ],
+                    "capture_exit_code": true
+                },
+                {
+                    "type": "conditional",
+                    "condition": "exit_code != 0",
+                    "then": [
+                        {
+                            "type": "warning",
+                            "message": "⚠️ Not all phases are complete! Review task_plan.md before stopping."
+                        },
+                        {
+                            "type": "prompt",
+                            "question": "Proceed anyway?",
+                            "options": [
+                                "Yes, stop anyway",
+                                "No, continue working"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "log",
+                    "target": "progress.md",
+                    "template": "\n### {{timestamp}} - Session End\n- **Completed:** [Summary]\n- **Remaining:** [What's left]\n"
+                }
+            ]
+        },
+        "OnFindingSaved": {
+            "enabled": true,
+            "priority": 50,
+            "description": "Reset 2-Action counter when findings are saved",
+            "triggers": [
+                "file_modified"
+            ],
+            "conditions": {
+                "file_pattern": "**/findings.md"
+            },
+            "actions": [
+                {
+                    "type": "reset_counter",
+                    "counter": "action_counter"
+                },
+                {
+                    "type": "update_metadata",
+                    "field": "stats.research_actions",
+                    "operation": "increment"
+                }
+            ]
+        }
+    },
+    "protocols": {
+        "2-action-rule": {
+            "description": "Save findings after every 2 research operations",
+            "threshold": 2,
+            "tracked_actions": [
+                "web_search",
+                "read_url",
+                "view_file",
+                "codebase_search"
+            ],
+            "save_target": "findings.md",
+            "enforcement": "reminder"
+        },
+        "3-strike-protocol": {
+            "description": "Structured error recovery escalation",
+            "max_strikes": 4,
+            "escalation_path": [
+                "fix",
+                "alternative",
+                "rethink",
+                "escalate"
+            ],
+            "log_target": "progress.md"
+        },
+        "5-question-reboot": {
+            "description": "Context recovery after session breaks",
+            "questions": 5,
+            "sources": [
+                "task_plan.md",
+                "findings.md",
+                "progress.md"
+            ],
+            "enforcement": "checklist"
+        }
+    },
+    "settings": {
+        "gracefulFallback": true,
+        "logHookExecution": true,
+        "logPath": ".agent/logs/hooks.log",
+        "debugMode": false,
+        "autoCreateMissingFiles": false,
+        "respectGitignore": true,
+        "maxLogSize": "10MB",
+        "timezone": "local"
+    },
+    "integrations": {
+        "git": {
+            "enabled": true,
+            "autoCommitOnPhaseComplete": false,
+            "commitMessageTemplate": "phase({{phase_number}}): {{phase_name}} complete"
+        },
+        "notifications": {
+            "enabled": false,
+            "provider": "system",
+            "onPhaseComplete": true,
+            "onError": true
+        }
+    }
+}
