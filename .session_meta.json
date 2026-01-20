@@ -1,0 +1,23 @@
+{
+    "session_id": "20260120_203930",
+    "created_at": "2026-01-20 20:39:30",
+    "goal": "",
+    "name": "",
+    "version": "2.0.0",
+    "status": "active",
+    "phases": {
+        "total": 5,
+        "completed": 0,
+        "in_progress": 0
+    },
+    "files": {
+        "task_plan": "task_plan.md",
+        "findings": "findings.md",
+        "progress": "progress.md"
+    },
+    "stats": {
+        "research_actions": 0,
+        "errors_encountered": 0,
+        "last_updated": "2026-01-20 20:39:30"
+    }
+}

@@ -133,7 +133,7 @@ void DeviceRow::updateStatus(bool connected, bool paired) {
 // ============================================================================
 
 MainWindow::MainWindow() {
-  set_title("ToothDroid v2.0");
+  set_title("ToothDroid v2.1");
   set_default_size(450, 600);
 
   // Initialize Bluetooth manager
@@ -420,15 +420,23 @@ void MainWindow::onDeviceDisconnect(const std::string &mac) {
 }
 
 void MainWindow::onSettingsClicked() {
-  // Show adapter info dialog
-  auto *dialog = Gtk::make_managed<Gtk::MessageDialog>(
-      *this, "Bluetooth Adapter", false, Gtk::MessageType::INFO,
-      Gtk::ButtonsType::OK, true);
+  auto *dialog = Gtk::make_managed<Gtk::AboutDialog>();
+  dialog->set_program_name("ToothDroid");
+  dialog->set_version("2.1");
+  dialog->set_comments("A modern, macOS-inspired Bluetooth Manager for "
+                       "Linux.\n\nBuilt with GTK4 & gtkmm-4.0 by Suayb Demir.");
+  dialog->set_copyright("© 2026 Suayb Demir");
+  dialog->set_license_type(Gtk::License::MIT_X11);
+  dialog->set_website(
+      "https://github.com/suaybdemir/bluetooth-connector-linux");
+  dialog->set_website_label("GitHub Repository");
+  dialog->set_authors({"Suayb Demir"});
 
-  std::string info = btManager->getAdapterInfo();
-  dialog->set_secondary_text(info);
+  // Dialog management
+  dialog->set_transient_for(*this);
   dialog->set_modal(true);
-  dialog->signal_response().connect([dialog](int) { dialog->hide(); });
+  dialog->set_hide_on_close(true);
+
   dialog->show();
 }
 

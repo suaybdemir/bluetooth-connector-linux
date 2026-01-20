@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.0] - 2026-01-20
+
+### 🚀 Features
+
+- **About Dialog:** Added a native `Gtk::AboutDialog` triggered by the settings button.
+- **Identification:** Updated window title and version strings to v2.1.
+
+### 🧹 Maintenance
+
+- **Code Quality:** Refactored dialog signal handling for GTK4 compliance.
+
 ## [v2.0.0] - 2026-01-20
 
 ### 🚀 Features
