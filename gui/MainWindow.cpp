@@ -133,7 +133,7 @@ void DeviceRow::updateStatus(bool connected, bool paired) {
 // ============================================================================
 
 MainWindow::MainWindow() {
-  set_title("ToothDroid");
+  set_title("ToothDroid v2.0");
   set_default_size(450, 600);
 
   // Initialize Bluetooth manager
