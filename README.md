@@ -2,6 +2,8 @@
 
 > **A modern, polished Bluetooth Device Manager for Linux.**
 
+![ToothDroid CLI Preview](cli-preview.png)
+
 ![ToothDroid UI Preview](ui-preview.png)
 
 ToothDroid is a lightweight, C++ based Bluetooth management utility built with **GTK4** and **gtkmm**. It offers a clean, **macOS-inspired Dark Mode** interface for managing your bluetooth devices with ease.
