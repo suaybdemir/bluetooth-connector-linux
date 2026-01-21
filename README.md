@@ -50,6 +50,10 @@ Managing Bluetooth on Linux usually means wrestling with terminals or using gene
   - 📡 Detailed signal and profile info
 
 ### ⌨️ Powerful CLI
+<p align="center">
+  <img src="docs/cli-preview.png" alt="ToothDroid CLI" width="600">
+</p>
+
 - **Interactive Menu**: Full control without the GUI if needed.
 - **Device Favorites**: Quick access to frequently used headphones/keyboards.
 - **Adapter Control**: Manage power, visibility, and unblocking.

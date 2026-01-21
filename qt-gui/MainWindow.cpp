@@ -14,7 +14,7 @@ namespace ToothDroid {
 namespace GUI {
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-  setWindowTitle("ToothDroid v2.1");
+  setWindowTitle("ToothDroid v2.2");
   resize(420, 680);
 
   // Remove system title bar and setup translucency
@@ -414,7 +414,7 @@ void MainWindow::onContextMenuRequested(const QPoint &pos) {
 void MainWindow::showAboutDialog() {
   QMessageBox::about(
       this, "About ToothDroid",
-      "<h3>ToothDroid v2.1</h3><p>Mac-styled Bluetooth Manager</p>"
+      "<h3>ToothDroid v2.2</h3><p>Mac-styled Bluetooth Manager</p>"
       "<p>Built with Qt6 (LGPL)</p>");
 }
 

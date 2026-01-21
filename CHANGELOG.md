@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.2.0] - 2026-01-21
+
+### 💥 Breaking Changes
+
+- **Qt6 Migration:** Replaced the entire GTK4 GUI stack with **Qt6** (QtWidgets) for improved cross-platform support and stability.
+
+### 🚀 Features
+
+- **Mac-Style UI:** Implemented custom traffic-light window controls (Close/Min/Max) and a frameless window design.
+- **Context Menu:** Added a comprehensive right-click menu for devices (Trust, Block, Pair, Unpair, Connect, Disconnect).
+- **Auto-Scan:** Enabled automatic background scanning on startup.
+- **About Dialog:** Added a Qt-based About dialog.
+
+### 🐛 Fixes
+
+- **Stability:** Replaced `QtConcurrent` with `std::thread` and added `QPointer` guards to fix Segmentation Faults.
+- **Race Components:** Resolved data races in device discovery and removal.
+
 ## [v2.1.0] - 2026-01-20
 
 ### 🚀 Features
