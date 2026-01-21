@@ -11,13 +11,24 @@ CLI_SRCS := main.cpp
 CLI_TARGET := toothdroid
 
 # Source files - GUI
-GUI_SRCS := main_gui.cpp gui/MainWindow.cpp
+# Source files - GUI
+GUI_SRCS := qt-gui/main.cpp qt-gui/MainWindow.cpp qt-gui/DeviceItemWidget.cpp
 GUI_TARGET := toothdroid-gui
-GUI_CFLAGS := $(shell pkg-config --cflags gtkmm-4.0 2>/dev/null)
-GUI_LIBS := $(shell pkg-config --libs gtkmm-4.0 2>/dev/null)
+GUI_MOC_HEADERS := qt-gui/MainWindow.h qt-gui/DeviceItemWidget.h
+
+# Qt6 Configuration
+QT_CFLAGS := $(shell pkg-config --cflags Qt6Widgets Qt6Core Qt6Concurrent) -fPIC
+QT_LIBS := $(shell pkg-config --libs Qt6Widgets Qt6Core Qt6Concurrent)
+
+# MOC Rules
+MOC := /usr/lib/qt6/moc
+qt-gui/moc_%.cpp: qt-gui/%.h
+	$(MOC) $< -o $@
+
+GUI_MOC_SRCS := $(GUI_MOC_HEADERS:qt-gui/%.h=qt-gui/moc_%.cpp)
 
 # Headers
-HEADERS := $(wildcard include/*.h) $(wildcard gui/*.h)
+HEADERS := $(wildcard include/*.h) $(wildcard qt-gui/*.h)
 
 # Legacy target
 LEGACY_TARGET := output
@@ -56,16 +67,24 @@ $(CLI_TARGET): $(CLI_SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(CLI_SRCS) -o $(CLI_TARGET)
 
 # GUI build
-gui: check-gtk $(GUI_TARGET)
+gui: check-qt $(GUI_TARGET)
 	@echo "$(GREEN)✓ GUI build complete: $(GUI_TARGET)$(NC)"
 
-$(GUI_TARGET): $(GUI_SRCS) $(HEADERS)
-	@echo "$(MAGENTA)Building ToothDroid GUI...$(NC)"
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $(GUI_CFLAGS) $(GUI_SRCS) -o $(GUI_TARGET) $(GUI_LIBS)
+$(GUI_TARGET): $(GUI_SRCS) $(GUI_MOC_SRCS) $(HEADERS)
+	@echo "$(MAGENTA)Building ToothDroid GUI (Qt6)...$(NC)"
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(QT_CFLAGS) $(GUI_SRCS) $(GUI_MOC_SRCS) -o $(GUI_TARGET) $(QT_LIBS)
+
+# Clean moc files
+clean-moc:
+	@rm -f qt-gui/moc_*.cpp
+
+# Update clean target
+clean: clean-moc
 
 # Check for GTK
-check-gtk:
-	@pkg-config --exists gtkmm-4.0 || (echo "$(YELLOW)⚠ gtkmm-4.0 not found. Install with: sudo pacman -S gtkmm-4.0$(NC)" && exit 1)
+# Check for Qt6
+check-qt:
+	@pkg-config --exists Qt6Widgets || (echo "$(YELLOW)⚠ Qt6Widgets not found. Install qt6-base/qt6-qtbase-devel$(NC)" && exit 1)
 
 # Debug builds
 debug:
@@ -93,8 +112,8 @@ legacy: $(CLI_SRCS) $(HEADERS)
 # Clean build artifacts
 clean:
 	@echo "$(CYAN)Cleaning...$(NC)"
-	@rm -f $(CLI_TARGET) $(GUI_TARGET) $(LEGACY_TARGET) *.o gui/*.o
-	@rm -f *.gch include/*.gch gui/*.gch
+	@rm -f $(CLI_TARGET) $(GUI_TARGET) $(LEGACY_TARGET) *.o qt-gui/*.o qt-gui/moc_*.cpp
+	@rm -f *.gch include/*.gch qt-gui/*.gch
 	@echo "$(GREEN)✓ Clean complete$(NC)"
 
 # Install both binaries
